@@ -26,7 +26,7 @@ This extension does not use any third-party services or analytics.
 
 ## Contact
 For questions or concerns, please open an issue on GitHub:
-https://github.com/dxdinh11/shopee-stats-extension
+https://github.com/dinhplus/shopee-stats-extension
 
 ## Changes to This Policy
 We may update this privacy policy from time to time. Updates will be posted on this page.
