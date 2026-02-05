@@ -90,18 +90,40 @@
             }
             
             // Thống kê theo năm
+            var orderMonth = (orderTime.getMonth() + 1).toString(); // 1-12
+            
             if (!thongKeTheoNam[orderYear]) {
               thongKeTheoNam[orderYear] = {
+                total: {
+                  tongTien: 0,
+                  donHang: 0,
+                  sanPham: 0,
+                  tienChuaGiam: 0
+                },
+                months: {}
+              };
+            }
+            
+            // Cập nhật tổng năm
+            thongKeTheoNam[orderYear].total.tongTien += tongTienDonHang;
+            thongKeTheoNam[orderYear].total.donHang += 1;
+            thongKeTheoNam[orderYear].total.sanPham += soSanPhamDonHang;
+            thongKeTheoNam[orderYear].total.tienChuaGiam += tongTienChuaGiamDonHang;
+            
+            // Cập nhật theo tháng
+            if (!thongKeTheoNam[orderYear].months[orderMonth]) {
+              thongKeTheoNam[orderYear].months[orderMonth] = {
                 tongTien: 0,
                 donHang: 0,
                 sanPham: 0,
                 tienChuaGiam: 0
               };
             }
-            thongKeTheoNam[orderYear].tongTien += tongTienDonHang;
-            thongKeTheoNam[orderYear].donHang += 1;
-            thongKeTheoNam[orderYear].sanPham += soSanPhamDonHang;
-            thongKeTheoNam[orderYear].tienChuaGiam += tongTienChuaGiamDonHang;
+            
+            thongKeTheoNam[orderYear].months[orderMonth].tongTien += tongTienDonHang;
+            thongKeTheoNam[orderYear].months[orderMonth].donHang += 1;
+            thongKeTheoNam[orderYear].months[orderMonth].sanPham += soSanPhamDonHang;
+            thongKeTheoNam[orderYear].months[orderMonth].tienChuaGiam += tongTienChuaGiamDonHang;
           });
           
           offset += si;
@@ -258,7 +280,7 @@
     var sortedYears = Object.keys(thongKeTheoNam).sort((a, b) => b - a);
     
     sortedYears.forEach(year => {
-      var data = thongKeTheoNam[year];
+      var data = thongKeTheoNam[year].total;
       var tietKiemNam = data.tienChuaGiam - data.tongTien;
       console.log('%c🗓️ NĂM ' + year + ':', 'font-size: 18px; color: #ff9800; font-weight: bold;');
       console.log('   💰 Chi tiêu: %c' + pxgPrice(data.tongTien) + ' vnđ', 'color: #f44336; font-weight: bold;');

@@ -40,8 +40,17 @@ export interface TimeBasedStats {
   tienChuaGiam: number;
 }
 
+export interface MonthlyStats {
+  [month: string]: TimeBasedStats; // month: '1', '2', ..., '12'
+}
+
+export interface YearStats {
+  total: TimeBasedStats;
+  months: MonthlyStats;
+}
+
 export interface YearBasedStats {
-  [year: string]: TimeBasedStats;
+  [year: string]: YearStats;
 }
 
 export interface Statistics {

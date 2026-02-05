@@ -15,6 +15,19 @@ export const Popup: React.FC = () => {
   const [progress, setProgress] = useState<string>('');
   const [message, setMessage] = useState<Message | null>(null);
   const [statistics, setStatistics] = useState<Statistics | null>(null);
+  const [expandedYears, setExpandedYears] = useState<Set<string>>(new Set());
+
+  const toggleYearExpansion = (year: string) => {
+    setExpandedYears(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(year)) {
+        newSet.delete(year);
+      } else {
+        newSet.add(year);
+      }
+      return newSet;
+    });
+  };
 
   // Load saved statistics and state on mount
   useEffect(() => {
@@ -141,33 +154,34 @@ export const Popup: React.FC = () => {
       </div>
 
       <div className="content">
-        {!statistics ? (
-          <>
-            <button
-              id="startStats"
-              className="btn-primary"
-              onClick={handleStartStats}
-              disabled={status === 'loading'}
-            >
-              🚀 Bắt Đầu Thống Kê
-            </button>
+        <div className="content-inner">
+          {!statistics ? (
+            <>
+              <button
+                id="startStats"
+                className="btn-primary"
+                onClick={handleStartStats}
+                disabled={status === 'loading'}
+              >
+                🚀 Bắt Đầu Thống Kê
+              </button>
 
-            {status === 'loading' && (
-              <div className="loading">
-                <div className="spinner"></div>
-                <p>Đang lấy dữ liệu...</p>
-                {progress && <p className="progress">{progress}</p>}
-              </div>
-            )}
+              {status === 'loading' && (
+                <div className="loading">
+                  <div className="spinner"></div>
+                  <p>Đang lấy dữ liệu...</p>
+                  {progress && <p className="progress">{progress}</p>}
+                </div>
+              )}
 
-            {message && (
-              <div className={`message ${message.type}`}>
-                {message.text}
-              </div>
-            )}
-          </>
-        ) : (
-          <div className="statistics">
+              {message && (
+                <div className={`message ${message.type}`}>
+                  {message.text}
+                </div>
+              )}
+            </>
+          ) : (
+            <div className="statistics">
             <div className="stats-header">
               <h2>{getSpendingAssessment(statistics.tongtienhang)}</h2>
               <button className="btn-reset" onClick={handleReset}>
@@ -227,14 +241,46 @@ export const Popup: React.FC = () => {
                 {statistics.thongKeTheoNam && Object.keys(statistics.thongKeTheoNam)
                   .sort((a, b) => Number(b) - Number(a))
                   .map((year) => {
-                    const data = statistics.thongKeTheoNam[year];
+                    const yearData = statistics.thongKeTheoNam[year];
+                    const isExpanded = expandedYears.has(year);
+                    const monthNames = ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 
+                                       'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'];
+                    
                     return (
-                      <div key={year} className="year-item">
-                        <div className="year-label">🗓️ {year}</div>
-                        <div className="year-data">
-                          <span>{formatPrice(data.tongTien)} đ</span>
-                          <span className="year-meta">{data.donHang} đơn • {data.sanPham} sp</span>
+                      <div key={year} className="year-item-wrapper">
+                        <div className="year-item">
+                          <div className="year-label">🗓️ {year}</div>
+                          <div className="year-data">
+                            <span>{formatPrice(yearData.total.tongTien)} đ</span>
+                            <span className="year-meta">{yearData.total.donHang} đơn • {yearData.total.sanPham} sp</span>
+                          </div>
+                          <button 
+                            className="btn-detail"
+                            onClick={() => toggleYearExpansion(year)}
+                          >
+                            {isExpanded ? '▲ Ẩn' : '▼ Chi tiết'}
+                          </button>
                         </div>
+                        
+                        {isExpanded && yearData.months && Object.keys(yearData.months).length > 0 && (
+                          <div className="month-breakdown">
+                            {Object.keys(yearData.months)
+                              .sort((a, b) => Number(a) - Number(b))
+                              .map((month) => {
+                                const monthData = yearData.months[month];
+                                const monthIndex = Number(month) - 1;
+                                return (
+                                  <div key={month} className="month-item">
+                                    <div className="month-label">📅 {monthNames[monthIndex]}</div>
+                                    <div className="month-data">
+                                      <span>{formatPrice(monthData.tongTien)} đ</span>
+                                      <span className="month-meta">{monthData.donHang} đơn • {monthData.sanPham} sp</span>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                          </div>
+                        )}
                       </div>
                     );
                   })}
@@ -242,10 +288,11 @@ export const Popup: React.FC = () => {
             </div>
           </div>
         )}
-      </div>
-
-      <div className="footer">
-        <p className="note">Extension này chỉ hoạt động khi bạn đã đăng nhập Shopee</p>
+        </div>
+        
+        <div className="footer">
+          <p className="note">Extension này chỉ hoạt động khi bạn đã đăng nhập Shopee</p>
+        </div>
       </div>
     </div>
   );

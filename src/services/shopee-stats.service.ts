@@ -99,19 +99,40 @@ export class ShopeeStatsService {
     }
 
     // Cập nhật thống kê theo năm
+    const orderMonth = (orderTime.getMonth() + 1).toString(); // 1-12
+    
     if (!this.statistics.thongKeTheoNam[orderYear]) {
       this.statistics.thongKeTheoNam[orderYear] = {
+        total: {
+          tongTien: 0,
+          donHang: 0,
+          sanPham: 0,
+          tienChuaGiam: 0
+        },
+        months: {}
+      };
+    }
+
+    // Cập nhật tổng năm
+    this.statistics.thongKeTheoNam[orderYear].total.tongTien += tongTienDonHang;
+    this.statistics.thongKeTheoNam[orderYear].total.donHang += 1;
+    this.statistics.thongKeTheoNam[orderYear].total.sanPham += soSanPhamDonHang;
+    this.statistics.thongKeTheoNam[orderYear].total.tienChuaGiam += tongTienChuaGiamDonHang;
+    
+    // Cập nhật theo tháng
+    if (!this.statistics.thongKeTheoNam[orderYear].months[orderMonth]) {
+      this.statistics.thongKeTheoNam[orderYear].months[orderMonth] = {
         tongTien: 0,
         donHang: 0,
         sanPham: 0,
         tienChuaGiam: 0
       };
     }
-
-    this.statistics.thongKeTheoNam[orderYear].tongTien += tongTienDonHang;
-    this.statistics.thongKeTheoNam[orderYear].donHang += 1;
-    this.statistics.thongKeTheoNam[orderYear].sanPham += soSanPhamDonHang;
-    this.statistics.thongKeTheoNam[orderYear].tienChuaGiam += tongTienChuaGiamDonHang;
+    
+    this.statistics.thongKeTheoNam[orderYear].months[orderMonth].tongTien += tongTienDonHang;
+    this.statistics.thongKeTheoNam[orderYear].months[orderMonth].donHang += 1;
+    this.statistics.thongKeTheoNam[orderYear].months[orderMonth].sanPham += soSanPhamDonHang;
+    this.statistics.thongKeTheoNam[orderYear].months[orderMonth].tienChuaGiam += tongTienChuaGiamDonHang;
   }
 
   /**

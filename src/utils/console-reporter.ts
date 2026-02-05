@@ -73,7 +73,7 @@ export class ConsoleReporter {
    * In thống kê theo năm
    */
   static printYearBasedStats(
-    thongKeTheoNam: Record<string, { tongTien: number; donHang: number; sanPham: number; tienChuaGiam: number }>
+    thongKeTheoNam: Record<string, { total: { tongTien: number; donHang: number; sanPham: number; tienChuaGiam: number }; months: any }>
   ): void {
     console.log('%c📊 THỐNG KÊ CHI TIÊU THEO NĂM', 'font-size: 22px; color: #9c27b0; font-weight: bold;');
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
@@ -81,7 +81,7 @@ export class ConsoleReporter {
     const sortedYears = Object.keys(thongKeTheoNam).sort((a, b) => Number(b) - Number(a));
     
     sortedYears.forEach(year => {
-      const data = thongKeTheoNam[year];
+      const data = thongKeTheoNam[year].total;
       const tietKiemNam = data.tienChuaGiam - data.tongTien;
       console.log('%c🗓️ NĂM ' + year + ':', 'font-size: 18px; color: #ff9800; font-weight: bold;');
       console.log('   💰 Chi tiêu: %c' + formatPrice(data.tongTien) + ' vnđ', 'color: #f44336; font-weight: bold;');
