@@ -49,9 +49,9 @@ Phân tích chi tiêu Shopee của bạn theo thời gian: 1 tháng, 3 tháng, 6
 - Vite Build System
 
 ### 🔗 Links:
-- GitHub: https://github.com/dxdinh11/shopee-stats-extension
-- Issues: https://github.com/dxdinh11/shopee-stats-extension/issues
-- Privacy Policy: https://github.com/dxdinh11/shopee-stats-extension/blob/main/PRIVACY_POLICY.md
+- GitHub: https://github.com/dinhplus/shopee-stats-extension
+- Issues: https://github.com/dinhplus/shopee-stats-extension/issues
+- Privacy Policy: https://github.com/dinhplus/shopee-stats-extension/blob/main/PRIVACY_POLICY.md
 
 ### ⭐ Support:
 Nếu thấy hữu ích, hãy để lại đánh giá 5 sao và chia sẻ với bạn bè nhé! 😊
@@ -73,7 +73,7 @@ Vietnamese (vi)
 5. Popup hiển thị thống kê theo năm
 
 ## Privacy Policy URL
-https://github.com/dxdinh11/shopee-stats-extension/blob/main/PRIVACY_POLICY.md
+https://github.com/dinhplus/shopee-stats-extension/blob/main/PRIVACY_POLICY.md
 
 ## Support URL
-https://github.com/dxdinh11/shopee-stats-extension/issues
+https://github.com/dinhplus/shopee-stats-extension/issues
