@@ -2,7 +2,6 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 import { copyFileSync, mkdirSync, existsSync, cpSync, readFileSync, writeFileSync } from 'fs';
-import JavaScriptObfuscator from 'javascript-obfuscator';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -35,24 +34,13 @@ export default defineConfig({
           mkdirSync(contentDir, { recursive: true });
         }
 
-        // Copy bridge.js and obfuscate
-        let bridgeScript = readFileSync(
+        // Copy bridge.js as-is (no obfuscation per Chrome Web Store policy)
+        copyFileSync(
           resolve(__dirname, 'public/content/bridge.js'),
-          'utf-8'
+          resolve(contentDir, 'bridge.js')
         );
-        const obfuscatedBridge = JavaScriptObfuscator.obfuscate(bridgeScript, {
-          compact: true,
-          controlFlowFlattening: true,
-          controlFlowFlatteningThreshold: 0.5,
-          deadCodeInjection: false,
-          stringArray: true,
-          stringArrayThreshold: 0.75,
-          transformObjectKeys: true,
-          unicodeEscapeSequence: false,
-        });
-        writeFileSync(resolve(contentDir, 'bridge.js'), obfuscatedBridge.getObfuscatedCode());
 
-        // Copy and patch content script, then obfuscate
+        // Copy and patch content script (no obfuscation per Chrome Web Store policy)
         let contentScript = readFileSync(
           resolve(__dirname, 'shopee-stats.js'),
           'utf-8'
@@ -65,18 +53,7 @@ export default defineConfig({
           .replace(/type: 'complete'/g, "type: 'SHOPEE_STATS_COMPLETE'")
           .replace(/type: 'error'/g, "type: 'SHOPEE_STATS_ERROR'");
         
-        // Obfuscate content script
-        const obfuscatedContent = JavaScriptObfuscator.obfuscate(contentScript, {
-          compact: true,
-          controlFlowFlattening: true,
-          controlFlowFlatteningThreshold: 0.5,
-          deadCodeInjection: false,
-          stringArray: true,
-          stringArrayThreshold: 0.75,
-          transformObjectKeys: true,
-          unicodeEscapeSequence: false,
-        });
-        writeFileSync(resolve(contentDir, 'content.js'), obfuscatedContent.getObfuscatedCode());
+        writeFileSync(resolve(contentDir, 'content.js'), contentScript);
         
         console.log('✅ Extension assets copied and patched successfully');
       }

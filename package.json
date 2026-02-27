@@ -1,7 +1,7 @@
 {
   "name": "shopee-stats-extension",
   "version": "2.0.0",
-  "description": "Extension Chrome giúp bạn xem thống kê chi tiêu trên Shopee theo thời gian và theo năm - Built with TypeScript & React",
+  "description": "Extension Chrome giúp bạn xem thống kê chi tiêu trên Shopee theo thời gian và theo năm",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -23,7 +23,6 @@
     "@types/react": "^19.2.10",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^4.7.0",
-    "javascript-obfuscator": "^5.2.1",
     "terser": "^5.46.0",
     "typescript": "^5.9.3",
     "vite": "^6.4.1",
