@@ -4,10 +4,12 @@
 Shopee Thống Kê Chi Tiêu - Xem Lịch Sử Đơn Hàng
 
 ## Short Description (Max 132 characters)
-Phân tích chi tiêu Shopee của bạn theo thời gian: 1 tháng, 3 tháng, 6 tháng, 1 năm và theo từng năm. Hoàn toàn miễn phí!
+Phân tích chi tiêu Shopee của bạn theo thời gian: 1 tháng, 3 tháng, 6 tháng, 1 năm và theo từng năm. Extension không chính thức.
 
 ## Detailed Description
 📊 **Shopee Thống Kê Chi Tiêu** - Extension miễn phí giúp bạn xem tổng quan chi tiêu trên Shopee.vn
+
+> ⚠️ **Lưu ý**: Đây là extension không chính thức, không được phát triển, tài trợ hay xác nhận bởi Shopee. Tên "Shopee" được sử dụng chỉ để mô tả chức năng của extension.
 
 ### 🎯 Tính Năng Chính:
 ✅ **Thống kê tổng quan**
@@ -43,21 +45,16 @@ Phân tích chi tiêu Shopee của bạn theo thời gian: 1 tháng, 3 tháng, 6
 4. Chờ extension thu thập dữ liệu
 5. Xem kết quả ngay trên popup!
 
-### 🛠️ Công Nghệ:
-- TypeScript + React
-- Chrome Extension Manifest V3
-- Vite Build System
-
 ### 🔗 Links:
 - GitHub: https://github.com/dinhplus/shopee-stats-extension
 - Issues: https://github.com/dinhplus/shopee-stats-extension/issues
 - Privacy Policy: https://github.com/dinhplus/shopee-stats-extension/blob/main/PRIVACY_POLICY.md
 
 ### ⭐ Support:
-Nếu thấy hữu ích, hãy để lại đánh giá 5 sao và chia sẻ với bạn bè nhé! 😊
+Nếu thấy hữu ích, hãy chia sẻ với bạn bè nhé! 😊
 
 ---
-**Lưu ý**: Extension này chỉ hoạt động trên shopee.vn và yêu cầu bạn đã đăng nhập.
+**Lưu ý**: Extension này chỉ hoạt động trên shopee.vn và yêu cầu bạn đã đăng nhập. Đây là extension không chính thức, không liên kết với Shopee.
 
 ## Category
 Shopping

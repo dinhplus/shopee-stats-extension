@@ -2,9 +2,10 @@
   "manifest_version": 3,
   "name": "Shopee Thống Kê Chi Tiêu",
   "version": "2.0.0",
-  "description": "Xem thống kê chi tiêu trên Shopee theo thời gian và theo năm - Built with TypeScript & React",
+  "description": "Xem thống kê chi tiêu trên Shopee theo thời gian và theo năm. Extension không chính thức, không liên kết với Shopee.",
   "author": "Dinh Plus",
   "homepage_url": "https://github.com/dinhplus/shopee-stats-extension",
+  "minimum_chrome_version": "88",
   "permissions": [
     "activeTab",
     "scripting",
