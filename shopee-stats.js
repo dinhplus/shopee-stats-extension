@@ -43,7 +43,6 @@
           
           orders.forEach(order => {
             var orderTime = getOrderTime(order);
-            var orderYear = orderTime.getFullYear();
             
             let tongTienDonHang = order['info_card']['final_total'] / 100000;
             tongtienhang += tongTienDonHang;
@@ -62,6 +61,11 @@
                 });
               });
             });
+            
+            // Bỏ qua thống kê theo thời gian nếu không có thông tin shipping
+            if (!orderTime) return;
+
+            var orderYear = orderTime.getFullYear();
             
             // Thống kê theo thời gian gần đây
             if (orderTime >= oneMonthAgo) {
@@ -317,7 +321,9 @@
   }
 
   function getOrderTime(order) {
-    return new Date(order.shipping.tracking_info.ctime * 1000);
+    var ctime = order.shipping && order.shipping.tracking_info && order.shipping.tracking_info.ctime;
+    if (ctime == null) return null;
+    return new Date(ctime * 1000);
   }
 
   // Start the statistics collection

@@ -10,7 +10,7 @@ export interface ShopeeOrder {
     final_total: number;
     order_list_cards: OrderListCard[];
   };
-  shipping: {
+  shipping?: {
     tracking_info: {
       ctime: number;
     };

@@ -23,8 +23,10 @@ export function formatPrice(number: number, fixed: number = 0): string {
  * @param order - Shopee order object
  * @returns Date object
  */
-export function getOrderTime(order: any): Date {
-  return new Date(order.shipping.tracking_info.ctime * 1000);
+export function getOrderTime(order: any): Date | null {
+  const ctime = order.shipping?.tracking_info?.ctime;
+  if (ctime == null) return null;
+  return new Date(ctime * 1000);
 }
 
 /**
