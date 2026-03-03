@@ -62,7 +62,6 @@ export class ShopeeStatsService {
     oneYearAgo: Date;
   }): void {
     const orderTime = getOrderTime(order);
-    const orderYear = orderTime.getFullYear().toString();
 
     // Tính tổng tiền đơn hàng (đã giảm giá)
     const tongTienDonHang = order.info_card.final_total / ShopeeStatsService.PRICE_DIVIDER;
@@ -83,6 +82,11 @@ export class ShopeeStatsService {
         });
       });
     });
+
+    // Bỏ qua thống kê theo thời gian nếu không có thông tin shipping
+    if (!orderTime) return;
+
+    const orderYear = orderTime.getFullYear().toString();
 
     // Cập nhật thống kê theo thời gian gần đây
     if (orderTime >= dateRanges.oneMonthAgo) {
