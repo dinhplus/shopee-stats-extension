@@ -1,6 +1,6 @@
 {
   "name": "shopee-stats-extension",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Extension Chrome giúp bạn xem thống kê chi tiêu trên Shopee theo thời gian và theo năm",
   "type": "module",
   "scripts": {
